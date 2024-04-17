@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function ContactForm() {
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
-    phone: Yup.string()
+    number: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
@@ -26,7 +26,7 @@ function ContactForm() {
 
   return (
     <Formik
-      initialValues={{ name: "", phone: "" }}
+      initialValues={{ name: "", number: "" }}
       validationSchema={FeedbackSchema}
       onSubmit={handleSubmit}
     >
@@ -38,8 +38,8 @@ function ContactForm() {
         </div>
         <div className={s.field}>
           <label htmlFor={phoneFieldId}>Number</label>
-          <Field type="text" name="phone" id={phoneFieldId} />
-          <ErrorMessage name="phone" component="div" className={s.error} />
+          <Field type="text" name="number" id={phoneFieldId} />
+          <ErrorMessage name="number" component="div" className={s.error} />
         </div>
         <button type="submit">Add contact</button>
       </Form>
